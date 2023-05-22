@@ -24,7 +24,11 @@ jobs:
           else
                echo "new_release=no" >> $GITHUB_ENV
           fi
-          
+      - name: Checkout  repo
+        uses: actions/checkout@v3
+        with:
+          repository: lyswhut/lx-music-sync-server
+
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
