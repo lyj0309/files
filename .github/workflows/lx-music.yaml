@@ -12,20 +12,20 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: check new_release
-        run: |
-          ls
-          n=`date -d "52 day ago" "+%Y-%m-%d"`
-          l=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".published_at"`
-          echo "tims: $l,$n"
-          tag=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".tag_name"`
-          if [[ $l =~ $n ]]
-          then
-               echo "new_release=yes" >> $GITHUB_ENV
-               echo "tag=$tag" >> $GITHUB_ENV
-          else
-               echo "new_release=no" >> $GITHUB_ENV
-          fi
+      # - name: check new_release
+      #   run: |
+      #     ls
+      #     n=`date -d "52 day ago" "+%Y-%m-%d"`
+      #     l=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".published_at"`
+      #     echo "tims: $l,$n"
+      #     tag=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".tag_name"`
+      #     if [[ $l =~ $n ]]
+      #     then
+      #          echo "new_release=yes" >> $GITHUB_ENV
+      #          echo "tag=$tag" >> $GITHUB_ENV
+      #     else
+      #          echo "new_release=no" >> $GITHUB_ENV
+      #     fi
 
 
       -
