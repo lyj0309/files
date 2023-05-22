@@ -1,18 +1,25 @@
 name: lx-music
 
 on:
+  push:
   watch:
     types: [ started ]
   schedule:
     - cron: "0 20 * * *"
   workflow_dispatch:
- # push:
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Checkout  repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.tag  }}
+          repository: lyswhut/lx-music-sync-server
+      - name: check new_release
+        run: |
+          ls
           n=`date -d "52 day ago" "+%Y-%m-%d"`
           l=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".published_at"`
           echo "tims: $l,$n"
@@ -24,10 +31,7 @@ jobs:
           else
                echo "new_release=no" >> $GITHUB_ENV
           fi
-      - name: Checkout  repo
-        uses: actions/checkout@v3
-        with:
-          repository: lyswhut/lx-music-sync-server
+
 
       -
         name: Set up QEMU
