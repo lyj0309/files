@@ -12,11 +12,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout  repo
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.tag  }}
-          repository: lyswhut/lx-music-sync-server
       - name: check new_release
         run: |
           ls
@@ -52,6 +47,7 @@ jobs:
         if: ${{ env.new_release == 'yes'  }}
         uses: docker/build-push-action@v4
         with:
+          context: "https://github.com/lyswhut/lx-music-sync-server.git#${{ env.tag }}"
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
