@@ -15,7 +15,7 @@ jobs:
       - name: check new_release
         run: |
           ls
-          n=`date -d "52 day ago" "+%Y-%m-%d"`
+          n=`date -d "1 day ago" "+%Y-%m-%d"`
           l=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".published_at"`
           echo "tims: $l,$n"
           tag=`wget -qO- -t1 -T2 "https://api.github.com/repos/lyswhut/lx-music-sync-server/releases/latest" | jq -r ".tag_name"`
